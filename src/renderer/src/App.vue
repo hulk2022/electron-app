@@ -1,26 +1,32 @@
-<script setup lang="ts">
-import Versions from './components/Versions.vue'
+<template>
+  <el-config-provider :locale="locale">
+    <router-view></router-view>
+  </el-config-provider>
+</template>
 
-const ipcHandle = () => window.electron.ipcRenderer.send('ping')
+<script setup lang="ts">
+import { ref, onBeforeMount, computed, getCurrentInstance, ComponentInternalInstance } from 'vue';
+
+import { VueI18n } from 'vue-i18n';
+const { proxy } = getCurrentInstance() as ComponentInternalInstance;
+const locale = computed(() => {
+  const i18n = proxy?.$i18n as VueI18n;
+  return i18n.messages[i18n.locale].el;
+});
+
+onBeforeMount(() => {
+  const dark = ref<string | null>(localStorage.getItem('dark'));
+  const element = document.querySelector('html') as HTMLElement | null;
+  if (element) {
+    if (dark.value == 'dark') {
+      element.className = 'dark';
+    } else {
+      element.className = '';
+    }
+  }
+});
 </script>
 
-<template>
-  <img alt="logo" class="logo" src="./assets/electron.svg" />
-  <div class="creator">Powered by electron-vite</div>
-  <div class="text">
-    Build an Electron app with
-    <span class="vue">Vue</span>
-    and
-    <span class="ts">TypeScript</span>
-  </div>
-  <p class="tip">Please try pressing <code>F12</code> to open the devTool</p>
-  <div class="actions">
-    <div class="action">
-      <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">Documentation</a>
-    </div>
-    <div class="action">
-      <a target="_blank" rel="noreferrer" @click="ipcHandle">Send IPC</a>
-    </div>
-  </div>
-  <Versions />
-</template>
+<style lang="scss">
+@import './assets/css/style.scss';
+</style>
