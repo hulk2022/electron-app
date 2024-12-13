@@ -19,10 +19,10 @@ const useLogin = async (res: ILoginRequest) => {
   localStorage.setItem('TOKEN', token || '');
 
   //2. 获取用户信息
-  await useUserStore().getUserInfo();
+  // await useUserStore().getUserInfo();
 
   //3. 获取路由
-  await useMenuStore().getMenu();
+  // await useMenuStore().getMenu();
 
   //4. 跳转后台管理系统首页
   router.push('/dashboard');

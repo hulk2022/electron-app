@@ -7,7 +7,7 @@ export const useMenuStore = defineStore('menuId', {
     menu: Parent[];
   } => {
     return {
-      menu: []
+      menu: [],
     };
   },
   getters: {},
@@ -15,15 +15,15 @@ export const useMenuStore = defineStore('menuId', {
     async getMenu() {
       const res = await getUserMenu(useUserStore().rolePerm);
       this.menu = res.data;
-    }
+    },
   },
   persist: {
     enabled: true, //开启数据缓存
     strategies: [
       {
         storage: localStorage, //默认走session
-        paths: ['menu']
-      }
-    ]
-  }
+        paths: ['menu'],
+      },
+    ],
+  },
 });

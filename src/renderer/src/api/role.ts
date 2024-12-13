@@ -84,11 +84,7 @@ interface IRoleMenu {
 }
 
 //菜单权限分页
-export const menuTree = (data: {
-  current: string;
-  size: string;
-  enabled: string;
-}): Promise<IRoleMenu> => {
+export const menuTree = (data: { current: string; size: string; enabled: string }): Promise<IRoleMenu> => {
   return http.get<IRoleMenu>('/system/menu/page', data);
 };
 
