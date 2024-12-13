@@ -12,7 +12,7 @@ import { ILoginRequest } from '@interface/login';
 
 const useLogin = async (res: ILoginRequest) => {
   //判断是否登录成功
-  if (res.code != '200') return ElMessage.error(res.msg);
+  if (res.code != 0) return ElMessage.error(res.msg);
 
   //1. 持久化存储token
   const token = res.data;

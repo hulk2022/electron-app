@@ -4,7 +4,7 @@
     <div class="login-config">
       <div class="login-config-btn">
         <!--国际化-->
-        <el-dropdown trigger="click" @command="configLang">
+        <!-- <el-dropdown trigger="click" @command="configLang">
           <el-button circle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@
               }}</el-dropdown-item>
             </el-dropdown-menu>
           </template>
-        </el-dropdown>
+        </el-dropdown> -->
         <!--换肤-->
         <el-button circle @click="configDark">
           <el-icon v-if="dark == 'dark'"><Sunny /></el-icon>
@@ -57,7 +57,7 @@
       <div class="login_adv_imgage">
         <img src="../../assets/images/data.png" width="100%" />
       </div>
-      <div class="login_adv_bottom">© 小鹿线客户管理系统 1.0.11</div>
+      <div class="login_adv_bottom">© Electron-CLI 1.0.0</div>
     </div>
     <!--右侧-->
     <div class="login-main">
@@ -65,7 +65,7 @@
         <div class="login-header">
           <div class="login-img">
             <img src="../../assets/images/logo.png" alt="" />
-            <label>小鹿线客户管理系统</label>
+            <label>Electron-CLI</label>
           </div>
         </div>
         <el-tabs>
@@ -76,17 +76,6 @@
             <phoneForm></phoneForm>
           </el-tab-pane>
         </el-tabs>
-        <template v-if="true">
-          <el-divider>{{ $t('login.signInOther') }}</el-divider>
-          <div class="login-oauth">
-            <!--微信按钮-->
-            <el-button type="success" circle size="large">
-              <el-icon size="large">
-                <ChatDotRound />
-              </el-icon>
-            </el-button>
-          </div>
-        </template>
       </div>
     </div>
   </div>
@@ -97,9 +86,8 @@ import passwordForm from '@views/login/components/passwordForm.vue';
 import phoneForm from '@views/login/components/phoneForm.vue';
 import useWindowDrag from '@hooks/useMouseDown';
 const { handleMouseDown } = useWindowDrag();
-
-import { reactive, ref, getCurrentInstance, ComponentInternalInstance } from 'vue';
-const { proxy } = getCurrentInstance() as ComponentInternalInstance;
+import { ref } from 'vue';
+// const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 
 //关闭软件
 const closeWin = (): void => {
@@ -122,17 +110,17 @@ const configDark = (): void => {
 };
 
 //国际化
-const config = reactive({
-  LANG: [
-    { name: '中文', value: 'zh-cn' },
-    { name: '英文', value: 'en' }
-  ]
-});
-const configLang = (item: { name: string; value: string }) => {
-  const $i18n = proxy?.$i18n;
-  $i18n!.locale = item.value;
-  localStorage.setItem('lang', item.value);
-};
+// const config = reactive({
+//   LANG: [
+//     { name: '中文', value: 'zh-cn' },
+//     { name: '英文', value: 'en' }
+//   ]
+// });
+// const configLang = (item: { name: string; value: string }) => {
+//   const $i18n = proxy?.$i18n;
+//   $i18n!.locale = item.value;
+//   localStorage.setItem('lang', item.value);
+// };
 </script>
 
 <style scoped>
@@ -243,7 +231,7 @@ const configLang = (item: { name: string; value: string }) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 120px;
+  width: 80px;
   margin: 10px 10px 0 0;
   float: right;
 }

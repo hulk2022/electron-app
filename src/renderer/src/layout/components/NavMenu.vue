@@ -19,7 +19,7 @@ defineProps({
   nextMenu: {
     type: Object as PropType<Parent[]>,
     required: true,
-    default: () => []
-  }
+    default: () => ({}),
+  },
 });
 </script>

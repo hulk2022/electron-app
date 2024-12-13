@@ -11,16 +11,16 @@ import English from 'element-plus/dist/locale/en.mjs';
 const messages = {
   'zh-cn': {
     el: zhCn,
-    ...zh
+    ...zh,
   },
   en: {
     el: English,
-    ...en
-  }
+    ...en,
+  },
 };
 const i18n = createI18n({
   locale: localStorage.getItem('lang') || 'zh-cn', // 初始化配置语言
-  messages
+  messages,
 });
 
 export default i18n;

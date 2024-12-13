@@ -15,17 +15,16 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, watch } from 'vue';
+import { watch } from 'vue';
 import { ITagRoute } from '@interface/tag';
 
 import { useTagStore } from '@store/useTagStore';
-let tagStore = useTagStore();
+const tagStore = useTagStore();
 
 import { storeToRefs } from 'pinia';
-let { viewTags } = storeToRefs(tagStore);
+const { viewTags } = storeToRefs(tagStore);
 
 import { useRoute } from 'vue-router';
-import { off } from 'process';
 import router from '@router';
 const route = useRoute();
 
@@ -36,7 +35,7 @@ const isActive = (routes: ITagRoute) => {
 
 //删除tag
 const closeTag = (tag: ITagRoute) => {
-  const nowTagIndex: number = viewTags.value.findIndex((item) => item.path == tag.path);
+  const nowTagIndex: number = viewTags.value.findIndex(item => item.path == tag.path);
   tagStore.removeViewTags(tag);
   if (isActive(tag)) {
     const leftView: ITagRoute = viewTags.value[nowTagIndex - 1];
@@ -52,10 +51,10 @@ watch(
   route,
   () => {
     if (route.name) {
-      let currentTag = {
+      const currentTag = {
         name: route.name,
         path: route.path,
-        affix: route.meta.affix
+        affix: route.meta.affix,
       } as ITagRoute;
       tagStore.pushViewTags(currentTag);
     }

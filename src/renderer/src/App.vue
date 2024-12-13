@@ -28,5 +28,5 @@ onBeforeMount(() => {
 </script>
 
 <style lang="scss">
-@import './assets/css/style.scss';
+@use './assets/css/style.scss';
 </style>

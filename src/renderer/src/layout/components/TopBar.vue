@@ -25,13 +25,13 @@
 import { onBeforeMount, ref, watch } from 'vue';
 import { Parent } from '@interface/user';
 import useWindowDrag from '@hooks/useMouseDown';
-let { handleMouseDown } = useWindowDrag();
+const { handleMouseDown } = useWindowDrag();
 import { useRoute } from 'vue-router';
 const route = useRoute();
 
 const breadList = ref<Parent[]>([]);
 const getBreadcrumb = () => {
-  let matched: Parent[] = route.meta.breadcrumb as Parent[];
+  const matched: Parent[] = route.meta.breadcrumb as Parent[];
   breadList.value = matched;
 };
 

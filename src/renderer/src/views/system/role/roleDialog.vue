@@ -1,10 +1,5 @@
 <template>
-  <el-dialog
-    v-model="dialogVisible"
-    :title="roleUpdateId != '' ? '修改角色' : '新增角色'"
-    width="600px"
-    @close="close"
-  >
+  <el-dialog v-model="dialogVisible" :title="roleUpdateId != '' ? '修改角色' : '新增角色'" width="600px" @close="close">
     <template #default>
       <el-form :model="roleForm">
         <el-form-item label="角色名称">
@@ -28,13 +23,9 @@
 
         <el-form-item label="菜单权限">
           <div class="menu-item">
-            <el-checkbox v-model="permission.openAll" @change="toggleTreeCollapse"
-              >展开/折叠</el-checkbox
-            >
+            <el-checkbox v-model="permission.openAll" @change="toggleTreeCollapse">展开/折叠</el-checkbox>
 
-            <el-checkbox v-model="permission.selectAll" @change="toggleTreeChecked"
-              >全选/全不选</el-checkbox
-            >
+            <el-checkbox v-model="permission.selectAll" @change="toggleTreeChecked">全选/全不选</el-checkbox>
 
             <el-checkbox v-model="permission.linkage">父子(联动/不联动)</el-checkbox>
 
@@ -80,12 +71,12 @@ import normalizeMenuList from './normalizeMenuList';
 const props = defineProps({
   dialogVisible: {
     type: Boolean,
-    default: false
+    default: false,
   },
   roleUpdateId: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 const dialogVisible = ref(props.dialogVisible);
 const roleUpdateId = ref(props.roleUpdateId);
@@ -100,7 +91,7 @@ const roleForm: {
   roleName: '', //角色名称
   rolePerm: '', //角色权限编码
   enabled: '1', //是否启用（0：禁用；1：启用）
-  descript: '' //描述
+  descript: '', //描述
 });
 
 interface IPermission {
@@ -117,11 +108,11 @@ interface IPermission {
 const permission: IPermission = reactive({
   treeList: [],
   treeProps: {
-    label: 'name'
+    label: 'name',
   },
   linkage: true,
   openAll: false,
-  selectAll: false
+  selectAll: false,
 });
 
 //tree的dom
@@ -135,7 +126,7 @@ onBeforeMount(async () => {
   const menuData = await menuTree({
     current: '1',
     size: '999',
-    enabled: '1'
+    enabled: '1',
   });
   const { records } = menuData.data;
   permission.treeList = normalizeMenuList(records);
@@ -157,7 +148,7 @@ onBeforeMount(async () => {
 //展开 & 折叠
 const toggleTreeCollapse = (e: boolean) => {
   const nodeMap = menuTreeRef.value!.store.nodesMap;
-  Object.keys(nodeMap).forEach((key) => {
+  Object.keys(nodeMap).forEach(key => {
     nodeMap[key].expanded = e;
   });
 };
@@ -165,13 +156,13 @@ const toggleTreeCollapse = (e: boolean) => {
 //全选 & 全不选
 const toggleTreeChecked = (e: boolean) => {
   const nodeMap = menuTreeRef.value!.store.nodesMap;
-  Object.keys(nodeMap).forEach((key) => {
+  Object.keys(nodeMap).forEach(key => {
     nodeMap[key].checked = e;
   });
 };
 
 //关闭dialog
-const emit = defineEmits();
+const emit = defineEmits(['update:dialogVisible']);
 const close = () => {
   emit('update:dialogVisible', false);
 };
@@ -180,7 +171,7 @@ const close = () => {
 const addRole = () => {
   roleAdd({
     permissionIds: menuTreeRef.value!.getCheckedKeys() as string[],
-    ...roleForm
+    ...roleForm,
   });
 };
 
@@ -188,7 +179,7 @@ const addRole = () => {
 const updateRole = () => {
   roleUpdate({
     permissionIds: menuTreeRef.value!.getCheckedKeys() as string[],
-    ...roleForm
+    ...roleForm,
   });
 };
 

@@ -17,16 +17,16 @@ import { ref } from 'vue';
 const props = defineProps({
   currentPage: {
     type: Number,
-    default: 1
+    default: 1,
   },
   pageSize: {
     type: Number,
-    default: 10
+    default: 10,
   },
   total: {
     type: Number,
-    default: 10
-  }
+    default: 10,
+  },
 });
 const currentPage = ref(props.currentPage);
 const pageSize = ref(props.pageSize);

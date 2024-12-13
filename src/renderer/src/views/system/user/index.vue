@@ -9,20 +9,12 @@
                 <el-row :gutter="15">
                   <el-col :span="8">
                     <el-form-item label="用户名称" prop="username">
-                      <el-input
-                        placeholder="请输入登录账号"
-                        clearable
-                        v-model="roleForm.username"
-                      />
+                      <el-input placeholder="请输入登录账号" clearable v-model="roleForm.username" />
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="真实姓名" prop="realName">
-                      <el-input
-                        placeholder="请输入真实姓名"
-                        clearable
-                        v-model="roleForm.realName"
-                      />
+                      <el-input placeholder="请输入真实姓名" clearable v-model="roleForm.realName" />
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -83,26 +75,22 @@
                 <el-table-column label="手机号码" prop="phone" width="150" align="center" />
                 <el-table-column label="用户性别" prop="gender" align="center">
                   <template #default="{ row }">
-                    <template v-for="item in dicts.system_global_gender">
-                      <div v-if="row.gender == item.v">{{ item.k }}</div>
+                    <template v-for="(item, index) in dicts.system_global_gender">
+                      <div v-if="row.gender == item.v" :key="index">{{ item.k }}</div>
                     </template>
                   </template>
                 </el-table-column>
                 <el-table-column label="账号状态" prop="enabled" align="center">
                   <template #default="{ row }">
-                    <template v-for="item in dicts.system_global_status">
-                      <el-tag v-if="row.enabled == item.v">{{ item.k }}</el-tag>
+                    <template v-for="(item, index) in dicts.system_global_status">
+                      <el-tag v-if="row.enabled == item.v" :key="index">{{ item.k }}</el-tag>
                     </template>
                   </template>
                 </el-table-column>
                 <el-table-column label="操作" width="280" fixed="right">
                   <template #default="{ row }">
                     <div class="sys-table-main-actions">
-                      <el-link
-                        icon="edit"
-                        :underline="false"
-                        type="primary"
-                        @click="btnUserDialog(row.id)"
+                      <el-link icon="edit" :underline="false" type="primary" @click="btnUserDialog(row.id)"
                         >编辑</el-link
                       >
                       <el-link
@@ -142,6 +130,7 @@
 import { ref, reactive, onBeforeMount, getCurrentInstance, ComponentInternalInstance } from 'vue';
 import { userPage, Record, userDel } from '@api/systemUser';
 import userDialog from './userDialog.vue';
+import { ElMessage, ElMessageBox } from 'element-plus';
 const roleForm = reactive({
   current: '1',
   size: '10',
@@ -152,7 +141,7 @@ const roleForm = reactive({
   phone: '',
   gender: '',
   enabled: '',
-  unitId: ''
+  unitId: '',
 });
 const userList = ref<Record[]>([]);
 const totals = ref(0);
@@ -194,7 +183,7 @@ const userReset = () => {
     phone: '',
     gender: '',
     enabled: '',
-    unitId: ''
+    unitId: '',
   });
   getUser();
 };
@@ -213,25 +202,24 @@ const btnUserDialog = (id: string) => {
 };
 
 //删除用户
-import { ElMessage, ElMessageBox } from 'element-plus';
 const del = (id: string) => {
   ElMessageBox.confirm('是否删除角色', {
     type: 'error',
-    confirmButtonText: '删除'
+    confirmButtonText: '删除',
   })
     .then(async () => {
       const res = await userDel(id);
       if (res.code != '200') return;
       ElMessage({
         type: 'success',
-        message: '删除成功'
+        message: '删除成功',
       });
       getUser();
     })
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: '取消删除'
+        message: '取消删除',
       });
     });
 };

@@ -1,10 +1,5 @@
 <template>
-  <el-dialog
-    v-model="dialogVisible"
-    width="800px"
-    :title="userUpdateId != '' ? '修改用户' : '新增用户'"
-    @close="close"
-  >
+  <el-dialog v-model="dialogVisible" width="800px" :title="userUpdateId != '' ? '修改用户' : '新增用户'" @close="close">
     <template #default>
       <el-form :model="userForm" label-width="90px" class="user-editor-form">
         <el-form-item label="用户名" prop="username" class="inline">
@@ -12,12 +7,7 @@
         </el-form-item>
 
         <el-form-item label="密码" prop="password" class="inline" v-if="!userForm.id">
-          <el-input
-            type="password"
-            v-model="userForm.password"
-            show-word-limit
-            placeholder="请输入用户密码"
-          />
+          <el-input type="password" v-model="userForm.password" show-word-limit placeholder="请输入用户密码" />
         </el-form-item>
 
         <el-form-item label="真实姓名" prop="realName" class="inline">
@@ -136,17 +126,17 @@ import {
   IUser,
   userAdd,
   userGet,
-  userUpdate
+  userUpdate,
 } from '@api/systemUser';
 const props = defineProps({
   dialogVisible: {
     type: Boolean,
-    default: false
+    default: false,
   },
   userUpdateId: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 const dialogVisible = ref(props.dialogVisible);
 const userUpdateId = ref(props.userUpdateId);
@@ -162,7 +152,7 @@ const userForm = reactive<Partial<IUser>>({
   unitId: '',
   postIds: [],
   roleIds: [],
-  remark: ''
+  remark: '',
 });
 
 //所属机构
@@ -208,7 +198,7 @@ onBeforeMount(async () => {
 });
 
 //关闭dialog
-const emit = defineEmits();
+const emit = defineEmits(['update:dialogVisible']);
 const close = () => {
   emit('update:dialogVisible', false);
 };

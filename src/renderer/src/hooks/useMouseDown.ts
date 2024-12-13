@@ -20,7 +20,7 @@ export default function useWindowDrag(): {
         const y = ev.screenY - initialY.value;
         const data = {
           appX: x,
-          appY: y
+          appY: y,
         };
         window.electron.ipcRenderer.invoke('custom-adsorption', data);
       }
@@ -44,6 +44,6 @@ export default function useWindowDrag(): {
 
   return {
     isKeyDown,
-    handleMouseDown
+    handleMouseDown,
   };
 }

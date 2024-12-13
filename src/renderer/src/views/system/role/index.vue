@@ -15,10 +15,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="角色编码">
-                      <el-input
-                        placeholder="请输入角色编码"
-                        v-model="roleForm.rolePerm"
-                      ></el-input> </el-form-item
+                      <el-input placeholder="请输入角色编码" v-model="roleForm.rolePerm"></el-input> </el-form-item
                   ></el-col>
                   <el-col :span="9">
                     <el-form-item label="状态">
@@ -64,11 +61,7 @@
                 <el-table-column label="操作" align="center" width="220" fixed="right">
                   <template #default="{ row }">
                     <div class="sys-table-main-actions">
-                      <el-link
-                        icon="edit"
-                        type="primary"
-                        :underline="false"
-                        @click="btnRoleDialog(row.id)"
+                      <el-link icon="edit" type="primary" :underline="false" @click="btnRoleDialog(row.id)"
                         >编辑</el-link
                       >
                       <el-link
@@ -79,9 +72,7 @@
                         @click="roleDel(row.id)"
                         >删除</el-link
                       >
-                      <router-link class="el-link el-link--error" type="success" to="/"
-                        >分配用户</router-link
-                      >
+                      <router-link class="el-link el-link--error" type="success" to="/">分配用户</router-link>
                     </div>
                   </template>
                 </el-table-column>
@@ -119,7 +110,7 @@ const roleForm = ref({
   size: 10,
   roleName: '',
   rolePerm: '',
-  enabled: ''
+  enabled: '',
 });
 
 onBeforeMount(() => {
@@ -149,7 +140,7 @@ const roleReset = () => {
     size: 10,
     roleName: '',
     rolePerm: '',
-    enabled: ''
+    enabled: '',
   };
   getRolePage();
 };
@@ -183,21 +174,21 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 const roleDel = (id: string) => {
   ElMessageBox.confirm('是否删除角色', {
     type: 'error',
-    confirmButtonText: '删除'
+    confirmButtonText: '删除',
   })
     .then(async () => {
       const res = await roleDelete(id);
       if (res.code != '200') return;
       ElMessage({
         type: 'success',
-        message: '删除成功'
+        message: '删除成功',
       });
       getRolePage();
     })
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: '取消删除'
+        message: '取消删除',
       });
     });
 };

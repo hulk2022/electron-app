@@ -6,14 +6,14 @@ interface IMemoPassWord {
 }
 
 function useMemoPassWord(): IMemoPassWord {
-  let memoVal: Ref<boolean> = ref(localStorage.getItem('memoPassWord') == 'true');
+  const memoVal: Ref<boolean> = ref(localStorage.getItem('memoPassWord') == 'true');
 
   const onMemoPassWord = (value: boolean) => {
     localStorage.setItem('memoPassWord', (memoVal.value = value).toString());
   };
   return {
     memoVal,
-    onMemoPassWord
+    onMemoPassWord,
   };
 }
 

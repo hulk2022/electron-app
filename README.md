@@ -1,76 +1,102 @@
-<h1 align="center">electron-app</h1>
+# electron-cli 基于Electron28+Vite5.x+Vue3+TypeScript搭建项目脚手架
 
-<p align="center">An Electron application with Vue3 and TypeScript</p>
+[官网](https://cn.electron-vite.org/)
 
-<p align="center">
-<img src="https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/electron" alt="electron-version">
-<img src="https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/electron-vite" alt="electron-vite-version" />
-<img src="https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/electron-builder" alt="electron-builder-version" />
-<img src="https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/vite" alt="vite-version" />
-<img src="https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/vue" alt="vue-version" />
-<img src="https://img.shields.io/github/package-json/dependency-version/alex8088/electron-vite-boilerplate/dev/typescript" alt="typescript-version" />
-</p>
+### Node版本
 
-<p align='center'>
-<img src='./build/electron-vite-vue-ts.png'/>
-</p>
+20.16.0
 
-## Features
+### 快速开始
 
-- 💡 Optimize asset handling
-- 🚀 Fast HMR for renderer processes
-- 🔥 Hot reloading for main process and preload scripts
-- 🔌 Easy to debug
-- 🔒 Compile to v8 bytecode to protect source code
+```sh
+# clone the project
+git clone http://172.30.64.82/zhuyuanchao/electron-cli.git or git@172.30.64.82:zhuyuanchao/electron-cli.git
 
-## Getting Started
+# enter the project directory
+cd electron-cli
 
-Read [documentation](https://electron-vite.org/) for more details.
+# install dependency
+nvm use 20.16.0
+npm install
 
-- [Configuring](https://electron-vite.org/config/)
-- [Development](https://electron-vite.org/guide/dev.html)
-- [Asset Handling](https://electron-vite.org/guide/assets.html)
-- [HMR](https://electron-vite.org/guide/hmr.html) & [Hot Reloading](https://electron-vite.org/guide/hot-reloading.html)
-- [Debugging](https://electron-vite.org/guide/debugging.html)
-- [Source code protection](https://electron-vite.org/guide/source-code-protection.html)
-- [Distribution](https://electron-vite.org/guide/distribution.html)
-- [Troubleshooting](https://electron-vite.org/guide/troubleshooting.html)
-
-You can also use the [create-electron](https://github.com/alex8088/quick-start/tree/master/packages/create-electron) tool to scaffold your project for other frameworks (e.g. `React`, `Svelte` or `Solid`).
-
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
-
-## Project Setup
-
-### Install
-
-```bash
-$ npm install
+# develop
+npm run dev
 ```
 
-### Development
+### 启动
 
-```bash
-$ npm run dev
+```
+npm run electron:serve:dev  开发
+npm run electron:serve:test  测试
+npm run electron:serve:staging  准上
+npm run electron:serve:prod  生产
 ```
 
-### Build
+### 构建
 
 ```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
+# 通过 cross-env NODE_ENV=production，确保构建打包NODE_ENV一定是production
+npm run electron:build:dev 开发
+npm run electron:build:test 测试
+npm run electron:build:staging 准上
+npm run electron:build:prod 生产
 ```
 
-## Examples
+### 开发须知
 
-- [electron-vite-bytecode-example](https://github.com/alex8088/electron-vite-bytecode-example), source code protection
-- [electron-vite-decorator-example](https://github.com/alex8088/electron-vite-decorator-example), typescipt decorator
-- [electron-vite-worker-example](https://github.com/alex8088/electron-vite-worker-example), worker and fork
+```
+1. 以下包为demo代码使用，可按需删除。@electron/remote；electron-settings;electron-shortcut-normalizer;glob;highlight.js
+```
+
+### 技术栈
+
+| 技术         | 描述                      | 学习地址                                                            |
+| ------------ | ------------------------- | ------------------------------------------------------------------- |
+| electron     | 写前端的方式开发桌面端    | [官网](https://www.electronjs.org/zh/docs/latest/api/app)           |
+| vite         | 新一代前端构建工具        | [官网](https://cn.vitejs.dev/guide/)                                |
+| vue3         | 渐进式前端框架            | [官网](https://cn.vuejs.org/guide/components/props.html)            |
+| typescript   | js 的超集，更好的代码提示 | [菜鸟教程](https://www.runoob.com/typescript/ts-object.html)        |
+| element-plus | 前端 ui 框架              | [文档地址](https://element-plus.gitee.io/zh-CN/component/icon.html) |
+| axios        | 请求发送                  | [官网](https://axios-http.com/zh/docs/intro)                        |
+| pinia        | 全局状态管理              | [官网](https://pinia.web3doc.top/introduction.html)                 |
+
+### 工程目录核心结构
+
+```diff
++ ├─┬ demos           Electron API示例
++ ├─┬ src
++ │ ├─┬ main
++ │ │ └── index.ts    Electron主进程入口
++ │ ├─┬ preload
++ │ │ └── index.ts    预加载ts脚本
+  ├─└─┬ renderer
+  │   └── src
+  ├────────└── api         请求API
+  ├────────├── assets      静态资源
+  ├────────├── components  vue公共组件
+  ├────────├── directives  全局指令
+  ├────────├── demos       示例代码目录
+  ├────────├── hooks       组合式函数封装
+  ├────────├── interface   类型定义
+  ├────────├── layout      布局组件
+  ├────────├── locales     多语言
+  ├────────├── mixin       混入
+  ├────────├── store       全局状态管理
+  ├────────├── utils       工具函数
+  ├───┬────└── views       视图
+  │   └── index.html
+  │
+  ├── package.json
+  └── electron.vite.config
+```
+
+### 必装插件
+
+- eslint 语法检测
+- prettier 代码格式化
+-
+
+### 本地调试
+
+> `Ctrl+Shift+i`打开控制台
+> `Ctrl+R`刷新

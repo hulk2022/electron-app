@@ -7,7 +7,7 @@ import { beforeEach, afterEach } from './guards';
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: AppRoutes
+  routes: AppRoutes,
 });
 
 //全局前置导航守卫

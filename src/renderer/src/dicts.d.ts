@@ -1,11 +1,11 @@
-export {}
+export {};
 
-interface Dicts{
-    [key:string]:any;
+interface Dicts {
+  [key: string]: any;
 }
 
-declare module 'vue'{
-    interface ComponentCustomProperties{
-        dicts:Dicts
-    }
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    dicts: Dicts;
+  }
 }

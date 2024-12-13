@@ -12,9 +12,9 @@ export const useStore = defineStore('storeId', {
     return {
       user: useUserStore(), //用户
       menu: useMenuStore(), //菜单
-      tag: useTagStore() //标签
+      tag: useTagStore(), //标签
     };
   },
   getters: {},
-  actions: {}
+  actions: {},
 });

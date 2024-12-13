@@ -9,10 +9,10 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin(), bytecodePlugin()]
+    plugins: [externalizeDepsPlugin(), bytecodePlugin()],
   },
   preload: {
-    plugins: [externalizeDepsPlugin(), bytecodePlugin()]
+    plugins: [externalizeDepsPlugin(), bytecodePlugin()],
   },
   renderer: {
     resolve: {
@@ -27,26 +27,26 @@ export default defineConfig({
         '@interface': resolve('src/renderer/src/interface'),
         '@hooks': resolve('src/renderer/src/hooks'),
         '@layout': resolve('src/renderer/src/layout'),
-        '@mixins': resolve('src/renderer/src/mixins')
-      }
+        '@mixins': resolve('src/renderer/src/mixins'),
+      },
     },
     server: {
       proxy: {
         '/api': {
-          target: 'http://uat.crm.xuexiluxian.cn',
+          target: 'http://10.10.90.221:18080',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
-        }
-      }
+          rewrite: path => path.replace(/^\/api/, ''),
+        },
+      },
     },
     plugins: [
       vue(),
       AutoImport({
-        resolvers: [ElementPlusResolver()]
+        resolvers: [ElementPlusResolver()],
       }),
       Components({
-        resolvers: [ElementPlusResolver()]
-      })
-    ]
-  }
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
+  },
 });

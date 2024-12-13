@@ -1,6 +1,6 @@
 export default {
   login: {
-    name: '小鹿线',
+    name: 'Electron-CLI',
     slogan: '最精简的基础权限框架系统',
     describe: '基于Electron + Vue3 + Element-Plus 的中后台前端解决方案。',
     signInTitle: '用户登录',
@@ -26,7 +26,7 @@ export default {
     createAccount: '创建新账号',
     wechatLoginTitle: '二维码登录',
     wechatLoginMsg: '请使用微信扫一扫登录 | 模拟3秒后自动扫描',
-    wechatLoginResult: '已扫描 | 请在设备中点击授权登录'
+    wechatLoginResult: '已扫描 | 请在设备中点击授权登录',
   },
   user: {
     dynamic: '近期动态',
@@ -35,6 +35,6 @@ export default {
     nightmode: '黑夜模式',
     nightmode_msg: '适合光线较弱的环境，当前黑暗模式为beta版本',
     language: '语言',
-    language_msg: '翻译进行中，暂翻译了本视图的文本'
-  }
+    language_msg: '翻译进行中，暂翻译了本视图的文本',
+  },
 };

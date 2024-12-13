@@ -5,14 +5,14 @@ export const useTagStore = defineStore('tagId', {
     viewTags: ITagRoute[];
   } => {
     return {
-      viewTags: []
+      viewTags: [],
     };
   },
   getters: {},
   actions: {
     //添加标签
     pushViewTags(route: ITagRoute) {
-      const target = this.viewTags.find((item) => item.path == route.path) as ITagRoute;
+      const target = this.viewTags.find(item => item.path == route.path) as ITagRoute;
       if (!target) {
         this.viewTags.push(route);
       }
@@ -24,15 +24,15 @@ export const useTagStore = defineStore('tagId', {
           this.viewTags.splice(index, 1);
         }
       });
-    }
+    },
   },
   persist: {
     enabled: true, //开启数据缓存
     strategies: [
       {
         storage: localStorage, //默认走session
-        paths: ['viewTags']
-      }
-    ]
-  }
+        paths: ['viewTags'],
+      },
+    ],
+  },
 });

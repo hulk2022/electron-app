@@ -12,14 +12,14 @@ export const useUserStore = defineStore('userId', {
       roles: [],
       rolePerm: '',
       userInfo: {},
-      permissions: []
+      permissions: [],
     };
   },
   getters: {},
   actions: {
     async getUserInfo() {
       const res = await getInfo();
-      const { permissions, roles, units, userInfo } = res.data;
+      const { permissions, roles, userInfo } = res.data;
 
       //角色信息
       this.roles = roles;
@@ -30,15 +30,15 @@ export const useUserStore = defineStore('userId', {
 
       //用户信息
       this.userInfo = userInfo;
-    }
+    },
   },
   persist: {
     enabled: true, //开启数据缓存
     strategies: [
       {
         storage: localStorage, //默认走session
-        paths: ['rolePerm', 'userInfo', 'permissions']
-      }
-    ]
-  }
+        paths: ['rolePerm', 'userInfo', 'permissions'],
+      },
+    ],
+  },
 });

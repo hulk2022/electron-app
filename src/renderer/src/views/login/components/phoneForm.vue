@@ -15,12 +15,7 @@
 
     <el-form-item prop="captcha">
       <div class="login-msg-yzm">
-        <el-input
-          v-model="ruleForm.captcha"
-          prefix-icon="unlock"
-          clearable
-          placeholder="请输入验证码"
-        ></el-input>
+        <el-input v-model="ruleForm.captcha" prefix-icon="unlock" clearable placeholder="请输入验证码"></el-input>
         <el-button @click="getCode" :disabled="disabled"
           >获取验证码<span v-if="disabled">({{ time }})</span></el-button
         >
@@ -28,12 +23,7 @@
     </el-form-item>
 
     <el-form-item>
-      <el-button
-        @click="login(ruleFormRef)"
-        type="primary"
-        style="width: 100%"
-        round
-        :loading="isLogin"
+      <el-button @click="login(ruleFormRef)" type="primary" style="width: 100%" round :loading="isLogin"
         >登录</el-button
       >
     </el-form-item>
@@ -55,7 +45,7 @@ const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<PhoneRuleForm>({
   mobile: '',
-  captcha: ''
+  captcha: '',
 });
 
 const validatorTel = (rule: any, value: string, callback: any) => {
@@ -69,7 +59,7 @@ const validatorTel = (rule: any, value: string, callback: any) => {
 };
 const rules = reactive<FormRules<PhoneRuleForm>>({
   mobile: [{ validator: validatorTel, trigger: 'blur' }],
-  captcha: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+  captcha: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 });
 const time = ref<number>(60);
 const disabled = ref<boolean>(false);
@@ -77,16 +67,16 @@ const isLogin = ref<boolean>(false);
 
 //获取验证码
 const getCode = async () => {
-  const validate = await ruleFormRef.value?.validateField('mobile', () => null);
+  const validate = await ruleFormRef.value?.validateField('mobile');
   if (!validate) {
     return ElMessage.error('请填写正确的手机号');
   }
 
   const res = await loginCaptcha({
-    mobile: Encrypt(ruleForm.mobile)
+    mobile: Encrypt(ruleForm.mobile),
   });
 
-  if (res.code != '200') return ElMessage.error(res.msg);
+  if (res.code != 0) return ElMessage.error(res.msg);
 
   ElMessage.success('发送成功');
 
@@ -109,12 +99,12 @@ import useLogin from '@hooks/useLogin';
 //登录
 const login = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  await formEl.validate(async (valid) => {
+  const validateFun = async valid => {
     if (valid) {
       isLogin.value = true;
       const res = await loginByMobile({
         mobile: Encrypt(ruleForm.mobile),
-        captcha: Encrypt(ruleForm.captcha)
+        captcha: Encrypt(ruleForm.captcha),
       });
       isLogin.value = false;
       //调用hooks
@@ -123,7 +113,8 @@ const login = async (formEl: FormInstance | undefined) => {
       return ElMessage.warning('请填写正确内容');
     }
     return;
-  });
+  };
+  await formEl.validate(validateFun as any);
 };
 </script>
 

@@ -45,7 +45,7 @@ const initRouter = () => {
   const menu: Parent[] = useMenuStore().menu;
   let menuRouter: Child[] = filterRouter(menu);
   menuRouter = flatRoutes(menuRouter);
-  menuRouter.forEach((item) => {
+  menuRouter.forEach(item => {
     router.addRoute(item.parentView == 'layout' ? 'layout' : '', item);
   });
 };
@@ -53,7 +53,7 @@ const initRouter = () => {
 //2. 把component 重构成 箭头函数的形式
 const filterRouter = (menu: Parent[]): Child[] => {
   const arrRouter: Child[] = [];
-  menu.forEach((item) => {
+  menu.forEach(item => {
     const route: Child = {
       parentView: item.parentView,
       path: item.path,
@@ -61,7 +61,7 @@ const filterRouter = (menu: Parent[]): Child[] => {
       meta: item.meta,
       redirect: item.redirect,
       children: item.children ? filterRouter(item.children) : null,
-      component: loadComponent(item.component)
+      component: loadComponent(item.component),
     };
     arrRouter.push(route);
   });
@@ -72,12 +72,8 @@ const filterRouter = (menu: Parent[]): Child[] => {
 const modules: Record<string, () => Promise<any>> = import.meta.glob('@renderer/views/**/*.vue');
 const modulesMap: Record<string, () => Promise<any>> = {};
 
-Object.keys(modules).forEach((key) => {
-  const componentName = key
-    .replace('/src/views', '')
-    .replace('.vue', '')
-    .replace('/index', '')
-    .replace('/', '');
+Object.keys(modules).forEach(key => {
+  const componentName = key.replace('/src/views', '').replace('.vue', '').replace('/index', '').replace('/', '');
   if (key.includes('index')) {
     modulesMap[`${componentName}/index`] = modules[key];
   }
@@ -107,7 +103,7 @@ const flatRoutes = (routes: Child[], breadcrumb: Child[] = []): Child[] => {
       delete tmpRoute.children;
       res.push(tmpRoute);
       const childrenRoutes = flatRoutes(tmp.children, childrenBreadcrumb);
-      childrenRoutes.map((item) => {
+      childrenRoutes.map(item => {
         res.push(item);
       });
     } else {

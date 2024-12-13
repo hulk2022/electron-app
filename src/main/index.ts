@@ -1,7 +1,6 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron';
 import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
-import icon from '../../resources/icon.png?asset';
 
 function createWindow(): void {
   // Create the browser window.
@@ -13,11 +12,10 @@ function createWindow(): void {
     resizable: false, //无法调整窗口大小
     // titleBarStyle: 'hidden',//隐藏标题
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
-    }
+      sandbox: false,
+    },
   });
 
   mainWindow.on('ready-to-show', () => {
@@ -83,7 +81,7 @@ function createWindow(): void {
 
   //mainWindow.webContents.openDevTools();
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
+  mainWindow.webContents.setWindowOpenHandler(details => {
     shell.openExternal(details.url);
     return { action: 'deny' };
   });

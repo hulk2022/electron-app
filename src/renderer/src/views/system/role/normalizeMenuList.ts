@@ -1,9 +1,6 @@
 import { IRoleMenuItem } from '@api/role';
-const normalizeMenuList = (
-  list: IRoleMenuItem[],
-  cb: (menu: IRoleMenuItem) => void = () => null
-): IRoleMenuItem[] => {
-  const menuMap = new Map(list.map((menu) => [menu.id, menu]));
+const normalizeMenuList = (list: IRoleMenuItem[], cb: (menu: IRoleMenuItem) => void = () => null): IRoleMenuItem[] => {
+  const menuMap = new Map(list.map(menu => [menu.id, menu]));
   const result: IRoleMenuItem[] = [];
 
   list.forEach((menu: IRoleMenuItem) => {

@@ -1,7 +1,8 @@
 //登录，后端给前端返回的数据
 export interface ILoginRequest {
-  code: string;
+  code: number;
   msg: string;
+  success: boolean;
   data?: string | null;
 }
 
@@ -9,7 +10,6 @@ export interface ILoginRequest {
 export interface UserRuleForm {
   username: string;
   password: string;
-  key: string;
   captcha: string;
 }
 

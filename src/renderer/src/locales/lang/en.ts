@@ -1,6 +1,6 @@
 export default {
   login: {
-    name: 'xiao lu xian',
+    name: 'Electron-CLI',
     slogan: 'The most concise basic permission framework system.',
     describe: 'Electron + Vue3 + element plus based front-end solutions in the background.',
     signInTitle: 'Sign in',
@@ -25,9 +25,8 @@ export default {
     noAccount: 'No account?',
     createAccount: 'Create a new account',
     wechatLoginTitle: 'QR code sign in',
-    wechatLoginMsg:
-      'Please use wechat to scan and log in | Auto scan after 3 seconds of simulation',
-    wechatLoginResult: 'Scanned | Please click authorize login in the device'
+    wechatLoginMsg: 'Please use wechat to scan and log in | Auto scan after 3 seconds of simulation',
+    wechatLoginResult: 'Scanned | Please click authorize login in the device',
   },
   user: {
     dynamic: 'Dynamic',
@@ -36,6 +35,6 @@ export default {
     nightmode: 'night mode',
     nightmode_msg: 'Suitable for low light environment,The current night mode is beta',
     language: 'language',
-    language_msg: 'Translation in progress,Temporarily translated the text of this view'
-  }
+    language_msg: 'Translation in progress,Temporarily translated the text of this view',
+  },
 };

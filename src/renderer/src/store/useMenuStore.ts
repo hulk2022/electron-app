@@ -13,7 +13,7 @@ export const useMenuStore = defineStore('menuId', {
   getters: {},
   actions: {
     async getMenu() {
-      let res = await getUserMenu(useUserStore().rolePerm);
+      const res = await getUserMenu(useUserStore().rolePerm);
       this.menu = res.data;
     }
   },
