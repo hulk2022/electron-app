@@ -2,7 +2,7 @@ export const AppRoutes = [
   {
     path: '/',
     name: 'layout',
-    redirect: '/dashboard',
+    redirect: '/login',
     component: () => import('@layout/index.vue'),
   },
   {
