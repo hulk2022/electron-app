@@ -1,4 +1,4 @@
-# electron-cli 基于Electron28+Vite5.x+Vue3+TypeScript搭建项目脚手架
+# electron-vite-cli 基于Electron28+Vite5.x+Vue3+TypeScript搭建项目脚手架
 
 [官网](https://cn.electron-vite.org/)
 
@@ -10,14 +10,14 @@
 
 ```sh
 # clone the project
-git clone http://172.30.64.82/zhuyuanchao/electron-cli.git or git@172.30.64.82:zhuyuanchao/electron-cli.git
+git clone http://172.30.64.82/zhuyuanchao/electron-vite-cli.git
 
 # enter the project directory
-cd electron-cli
+cd electron-vite-cli
 
 # install dependency
 nvm use 20.16.0
-npm install
+cnpm install
 
 # develop
 npm run dev

@@ -1,7 +1,12 @@
 import { resolve } from 'path';
 import { defineConfig, externalizeDepsPlugin, bytecodePlugin } from 'electron-vite';
 import vue from '@vitejs/plugin-vue';
+import path from 'path';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+console.log('__dirname', __dirname);
 //引入Element Plus
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
@@ -15,6 +20,7 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin(), bytecodePlugin()],
   },
   renderer: {
+    envDir: path.resolve(__dirname, './env'),
     resolve: {
       alias: {
         '@renderer': resolve('src/renderer/src'),
